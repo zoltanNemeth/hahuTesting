@@ -1,0 +1,9 @@
+# Go
+bin
+vendor
+
+# GoLand
+.idea
+
+# Others
+.env
