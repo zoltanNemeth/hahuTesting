@@ -17,7 +17,6 @@ before_script:
   - export webdriverPath=/home/travis/chromedriver
   - export PATH=$PATH:/home/travis/
   - sudo apt-get install libgconf-2-4
-  - chromedriver
 
 script:
   - go test
