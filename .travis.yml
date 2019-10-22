@@ -16,6 +16,7 @@ before_script:
   - unzip chromedriver_linux64.zip -d /home/travis/
   - export webdriverPath=/home/travis/chromedriver
   - export PATH=$PATH:/home/travis/
+  - cd /home/travis
   - chromedriver
 
 script:
