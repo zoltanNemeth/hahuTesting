@@ -1,9 +1,14 @@
 package step_definitions
 
 import (
+	"fmt"
 	"github.com/DATA-DOG/godog"
 	"github.com/zoltanNemeth/hahuTesting/pages"
 	"strconv"
+)
+
+var (
+	resultsPage pages.ResultsPage
 )
 
 func theVisitorLimitsThePotentialResultsTo(limit string) error {
@@ -13,12 +18,16 @@ func theVisitorLimitsThePotentialResultsTo(limit string) error {
 }
 
 func theVisitorClicksOnTheSearchButton() error {
-	pages.HomePage().ClickSearchButton()
+	resultsPage = pages.HomePage().ClickSearchButton()
 	return nil
 }
 
-func resultsShouldAppearOnThePage(arg1 int) error {
-	return nil
+func resultsShouldAppearOnThePage(numOfResults int) error {
+	actual := resultsPage.GetNumOfResults()
+	if numOfResults == actual {
+		return nil
+	}
+	return fmt.Errorf("not the expected amount of results on the page, get %v instead of %v", actual, numOfResults)
 }
 
 func SearchingFeature(s *godog.Suite) {

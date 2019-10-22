@@ -8,4 +8,7 @@ Feature: searching
 
     Examples:
       | numberOfResults |
+      |       10        |
       |       20        |
+      |       50        |
+      |       100       |
