@@ -17,6 +17,7 @@ before_script:
   - export webdriverPath=/home/travis/chromedriver
   - export PATH=$PATH:/home/travis/
   - cd /home/travis
+  - ls
   - chromedriver
 
 script:
