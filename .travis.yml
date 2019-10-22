@@ -15,9 +15,9 @@ before_script:
   - wget http://chromedriver.storage.googleapis.com/2.24/chromedriver_linux64.zip
   - unzip chromedriver_linux64.zip -d /home/travis/
   - export webdriverPath=/home/travis/chromedriver
+  - java -version
 
 script:
-  - java -version
   - go test
 
 notifications:
