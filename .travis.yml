@@ -13,3 +13,6 @@ branches:
 
 script:
   - go test
+
+notifications:
+  email: false
