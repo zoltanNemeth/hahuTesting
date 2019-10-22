@@ -54,7 +54,7 @@ func init() {
 
 		caps := selenium.Capabilities{
 			"browserName": "chrome",
-			"args":        "--no-sandbox",
+			"args":        "--no-sandbox --headless",
 		}
 
 		wd, err := selenium.NewRemote(caps, "http://127.0.0.1:"+strconv.Itoa(port)+"/wd/hub")
