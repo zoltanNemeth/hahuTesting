@@ -32,23 +32,19 @@ var (
 //	return webDriver.webdriver
 //}
 
-// why can't I call init() from driver() and Service()???
-
 func Driver() selenium.WebDriver {
-	Init()
 	return d.webdriver
 }
 
 func Service() selenium.Service {
-	Init()
 	return d.service
 }
 
-func Init() {
+func init() {
 	if d == nil {
 		port, err := pickUnusedPort()
 
-		godotenv.Load()
+		_ = godotenv.Load()
 		var opts []selenium.ServiceOption
 		s, err := selenium.NewChromeDriverService(os.Getenv("webdriverPath"), port, opts...)
 
