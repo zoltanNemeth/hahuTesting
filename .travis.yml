@@ -17,6 +17,7 @@ before_script:
   - export webdriverPath=/home/travis/chromedriver
 
 script:
+  - java -version
   - go test
 
 notifications:
