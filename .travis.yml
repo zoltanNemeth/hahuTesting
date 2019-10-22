@@ -17,6 +17,9 @@ before_script:
   - export webdriverPath=/home/travis/chromedriver
   - export PATH=$PATH:/home/travis/
   - sudo apt-get install libgconf-2-4
+  - export CHROME_BIN=chromium-browser
+  - "export DISPLAY=:99.0"
+  - sleep 3
 
 script:
   - go test
