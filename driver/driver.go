@@ -56,7 +56,7 @@ func init() {
 			"browserName": "chrome",
 		}
 
-		wd, err := selenium.NewRemote(caps, "http://127.0.0.1:"+strconv.Itoa(port)+"/wd/hub")
+		wd, err := selenium.NewRemote(caps, "http://localhost:"+strconv.Itoa(port)+"/wd/hub")
 		if err != nil {
 			panic(err)
 		}
