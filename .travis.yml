@@ -13,8 +13,8 @@ branches:
 
 before_script:
   - wget http://chromedriver.storage.googleapis.com/2.24/chromedriver_linux64.zip
-  - unzip chromedriver_linux64.zip -d /home/travis/usr/bin/
-  - export webdriverPath=/home/travis/usr/bin/chromedriver_linux64/chromedriver
+  - unzip chromedriver_linux64.zip -d /home/travis/
+  - export webdriverPath=/home/travis/chromedriver_linux64/chromedriver
 
 script:
   - go test
