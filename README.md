@@ -1,6 +1,8 @@
 # Running tests in hahuTesting
 
-This is a project to practice using Go, Gherkin and Selenium together.
+## About the project
+
+This is a project to practice test automation using Go, Gherkin and Selenium.
 
 I started this project (and learning Go) on the 17th of October, 2019.
 System under test is hasznaltauto.hu, hahu in short.
@@ -16,7 +18,8 @@ I hope this will help me to get an offer at the AC of Adevinta on Friday.
 
 #### Using command: go run $GOPATH/src/github.com/DATA-DOG/godog/cmd/godog
 Preconditions:
-- run go get github.com/DATA-DOG/godog and delete the go.mod and go.sum files.
+- run go get github.com/DATA-DOG/godog
+- delete the go.mod and go.sum files from the project directory
 
 Run command in the root directory of the project.
 
