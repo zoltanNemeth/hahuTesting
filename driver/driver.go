@@ -14,23 +14,7 @@ type driver struct {
 	webdriver selenium.WebDriver
 }
 
-//type simpleWebDriver struct {
-//	webdriver selenium.WebDriver
-//}
-
-var (
-	d *driver
-	//webDriver *simpleWebDriver
-)
-
-//func SimpleDriver() selenium.WebDriver  {
-//	caps := selenium.Capabilities{"browserName": "chrome"}
-//	driver, _ := selenium.NewRemote(caps, "")
-//	webDriver = &simpleWebDriver{
-//		webdriver: driver,
-//	}
-//	return webDriver.webdriver
-//}
+var d *driver
 
 func Driver() selenium.WebDriver {
 	return d.webdriver
