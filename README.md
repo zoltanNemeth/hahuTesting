@@ -7,12 +7,18 @@ This is a project to practice test automation using Go, Gherkin and Selenium.
 I started this project (and learning Go) on the 17th of October, 2019.
 System under test is hasznaltauto.hu, hahu in short.
 I hope this will help me to get an offer at the AC of Adevinta on Friday.
-I tried out Travis CI but yet I couldn't configure this project properly to be able to run,
-so check another simple project that runs fine at Travis at https://github.com/zoltanNemeth/travis/
+
+I tried out Travis CI but yet I couldn't set chromeOptions in driver
+to be able to run the tests,
+so check another simple project at https://github.com/zoltanNemeth/travis/
+that runs fine at Travis.
+
+Dockerfile is coming soon...
 
 ## Running tests in hahuTesting
 
 ### Preconditions:
+- Go 1.11 or newer version should be added to PATH environmental variable in your operating system
 - The feature files should be in the features directory
 - Java should be installed
 - Chrome browser should be installed
@@ -20,22 +26,17 @@ so check another simple project that runs fine at Travis at https://github.com/z
 - .env text file should be created in the root directory of the project
   and it should contain webdriverPath=\<path to your webdriver\>
 
-#### Using command: go run $GOPATH/src/github.com/DATA-DOG/godog/cmd/godog
-Preconditions:
-- run go get github.com/DATA-DOG/godog
-- delete the go.mod and go.sum files from the project directory
+#### Using command: `go test`
 
-Run command in the root directory of the project.
-
-In this case, you should have the func *(s *godog.Suite) {...} function(s) in  *_test.go files
-    in the root directory of your project.
-
-#### Using command: go test
 Precondition:
 - run go mod vendor before the first go test execution.
 
-In this case you should call func *(s *godog.Suite) {...} function(s)
-    in godog.RunWithOptions("godogs", func(s *godog.Suite) {...} function in godog_test.go
+## Adding new tests
+
+Add new features, scenarios then run `go test`.
+Godog will print to the console the instructions.
+You should call *(s *godog.Suite) {...} method(s)
+in godog.RunWithOptions("godogs", func(s *godog.Suite) {...} in godog_test.go
 
 
 
