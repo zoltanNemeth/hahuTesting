@@ -28,7 +28,11 @@ func init() {
 	if d == nil {
 		port, err := pickUnusedPort()
 
-		_ = godotenv.Load()
+		err = godotenv.Load()
+		if err != nil {
+			fmt.Printf("Error loading the .env file: %v", err)
+		}
+
 		var opts []selenium.ServiceOption
 		s, err := selenium.NewChromeDriverService(os.Getenv("webdriverPath"), port, opts...)
 
