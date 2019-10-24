@@ -1,4 +1,4 @@
-# Running tests in hahuTesting
+# hahuTesting
 
 ## About the project
 
@@ -7,8 +7,12 @@ This is a project to practice test automation using Go, Gherkin and Selenium.
 I started this project (and learning Go) on the 17th of October, 2019.
 System under test is hasznaltauto.hu, hahu in short.
 I hope this will help me to get an offer at the AC of Adevinta on Friday.
+I tried out Travis CI but yet I couldn't configure this project properly to be able to run,
+so check another simple project that runs fine at Travis at https://github.com/zoltanNemeth/travis/
 
-## Preconditions:
+## Running tests in hahuTesting
+
+### Preconditions:
 - The feature files should be in the features directory
 - Java should be installed
 - Chrome browser should be installed
