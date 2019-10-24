@@ -29,7 +29,7 @@ Dockerfile is coming soon...
 #### Using command: `go test`
 
 Precondition:
-- run go mod vendor before the first go test execution.
+- run `go mod vendor` before the first go test execution.
 
 ## Adding new tests
 
