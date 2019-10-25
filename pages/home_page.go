@@ -36,31 +36,31 @@ func HomePage() *homePage {
 }
 
 func (h *homePage) LimitResultsTo(limit int) {
-	_ = h.Page.FindElementById(resultsLimitingSelectId).Click()
+	h.Page.FindElementById(resultsLimitingSelectId).Click()
 	stringLimit := strconv.Itoa(limit)
 	desiredLimitOptionXpath := "//select[@id='" + resultsLimitingSelectId + "']" + "//option[@value='" + stringLimit + "']"
-	_ = h.Page.FindElementByXpath(desiredLimitOptionXpath).Click()
+	h.Page.FindElementByXpath(desiredLimitOptionXpath).Click()
 }
 
 func (h *homePage) AcceptPrivacyInformation() {
-	_ = h.Page.FindElementById(privacySettingsOkButtonId).Click()
+	h.Page.FindElementById(privacySettingsOkButtonId).Click()
 }
 
 func (h *homePage) ClickSearchButton() ResultsPage {
-	_ = h.Page.FindElementByXpath(searchButton).Click()
+	h.Page.FindElementByXpath(searchButton).Click()
 	currentURL, _ := driver.Driver().CurrentURL()
 	return NewResultsPage(currentURL)
 }
 
 func (h *homePage) ClickLoginButton() {
-	_ = h.Page.FindElementByXpath(menuToggleXpath).Click()
-	_ = h.Page.FindElementByLinkText(loginButtonLinkText).Click()
+	h.Page.FindElementByXpath(menuToggleXpath).Click()
+	h.Page.FindElementByLinkText(loginButtonLinkText).Click()
 }
 
 func (h *homePage) LoginWith(username, password string) {
-	_ = h.Page.FindElementById(usernameInputFieldId).SendKeys(username)
-	_ = h.Page.FindElementById(passwordInputFieldId).SendKeys(password)
-	_ = h.Page.FindElementByLinkText(loginButtonLinkText)
+	h.Page.FindElementById(usernameInputFieldId).SendKeys(username)
+	h.Page.FindElementById(passwordInputFieldId).SendKeys(password)
+	h.Page.FindElementByLinkText(loginButtonLinkText)
 }
 
 func (h *homePage) IsThereAnErrorMessage() bool {
