@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/joho/godotenv"
 	"github.com/tebeka/selenium"
+	"github.com/tebeka/selenium/chrome"
 	"net"
 	"os"
 	"strconv"
@@ -34,7 +35,7 @@ func init() {
 		}
 
 		var opts []selenium.ServiceOption
-		s, err := selenium.NewChromeDriverService(os.Getenv("webdriverPath"), port, opts...)
+		s, err := selenium.NewChromeDriverService(os.Getenv("WEBDRIVER_PATH"), port, opts...)
 
 		if err != nil {
 			fmt.Printf("Error starting the ChromeDriver server: %v", err)
@@ -43,6 +44,10 @@ func init() {
 		caps := selenium.Capabilities{
 			"browserName": "chrome",
 		}
+
+		args := []string{"start-maximized", "no-sandbox"}
+
+		caps.AddChrome(chrome.Capabilities{Args: args})
 
 		wd, err := selenium.NewRemote(caps, "http://127.0.0.1:"+strconv.Itoa(port)+"/wd/hub")
 		if err != nil {
