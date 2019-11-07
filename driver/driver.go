@@ -51,7 +51,6 @@ func init() {
 			"no-default-browser-check",
 			"no-first-run",
 			"disable-default-apps",
-			"disable-dev-shm-usage",
 			"headless",
 		}
 
