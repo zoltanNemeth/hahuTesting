@@ -10,7 +10,7 @@ type Page struct {
 }
 
 func (s *Page) GoTo() {
-	_ = s.driver.Get(s.URL)
+	s.driver.Get(s.URL)
 }
 
 func (s *Page) IsAt() bool {
@@ -100,6 +100,6 @@ func (s *Page) FindElementsByCss(locator string) []selenium.WebElement {
 
 func (s *Page) MouseHoverToElement(locator string) selenium.WebElement {
 	element, _ := s.driver.FindElement(selenium.ByCSSSelector, locator)
-	_ = element.MoveTo(0, 0)
+	element.MoveTo(0, 0)
 	return element
 }

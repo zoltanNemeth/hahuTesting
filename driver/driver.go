@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/joho/godotenv"
 	"github.com/tebeka/selenium"
+	"github.com/tebeka/selenium/chrome"
 	"net"
 	"os"
 	"strconv"
@@ -14,23 +15,7 @@ type driver struct {
 	webdriver selenium.WebDriver
 }
 
-//type simpleWebDriver struct {
-//	webdriver selenium.WebDriver
-//}
-
-var (
-	d *driver
-	//webDriver *simpleWebDriver
-)
-
-//func SimpleDriver() selenium.WebDriver  {
-//	caps := selenium.Capabilities{"browserName": "chrome"}
-//	driver, _ := selenium.NewRemote(caps, "")
-//	webDriver = &simpleWebDriver{
-//		webdriver: driver,
-//	}
-//	return webDriver.webdriver
-//}
+var d *driver
 
 func Driver() selenium.WebDriver {
 	return d.webdriver
@@ -44,9 +29,13 @@ func init() {
 	if d == nil {
 		port, err := pickUnusedPort()
 
-		_ = godotenv.Load()
+		err = godotenv.Load()
+		if err != nil {
+			fmt.Printf("Error loading the .env file: %v", err)
+		}
+
 		var opts []selenium.ServiceOption
-		s, err := selenium.NewChromeDriverService(os.Getenv("webdriverPath"), port, opts...)
+		s, err := selenium.NewChromeDriverService(os.Getenv("WEBDRIVER_PATH"), port, opts...)
 
 		if err != nil {
 			fmt.Printf("Error starting the ChromeDriver server: %v", err)
@@ -55,6 +44,10 @@ func init() {
 		caps := selenium.Capabilities{
 			"browserName": "chrome",
 		}
+
+		args := []string{"start-maximized", "no-sandbox"}
+
+		caps.AddChrome(chrome.Capabilities{Args: args})
 
 		wd, err := selenium.NewRemote(caps, "http://127.0.0.1:"+strconv.Itoa(port)+"/wd/hub")
 		if err != nil {

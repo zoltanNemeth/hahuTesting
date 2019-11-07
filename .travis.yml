@@ -9,20 +9,28 @@ env:
 
 branches:
   only:
-    - travis
+    - develop
 
-before_script:
-  - wget http://chromedriver.storage.googleapis.com/2.24/chromedriver_linux64.zip
-  - unzip chromedriver_linux64.zip -d /home/travis/
-  - export webdriverPath=/home/travis/chromedriver
-  - export PATH=$PATH:/home/travis/
-  - sudo apt-get install libgconf-2-4
-  - export CHROME_BIN=chromium-browser
-  - "export DISPLAY=:99.0"
-  - sleep 3
+stages:
+  - setupEnvironment
+  - test
+  - deploy
 
-script:
-  - go test
+jobs:
+  include:
+    - stage: setupEnvironment
+      script:
+        - wget http://chromedriver.storage.googleapis.com/2.24/chromedriver_linux64.zip
+        - unzip chromedriver_linux64.zip -d /home/travis/
+        - export webdriverPath=/home/travis/chromedriver
+        - export PATH=$PATH:/home/travis/
+        - sudo apt-get install -y libgconf-2-4
+    - stage: test
+      script: go test
+    - stage: deploy
+      provider: script
+      script:
+        -echo 'deploy stage is not implemented yet'
 
 notifications:
   email: false
