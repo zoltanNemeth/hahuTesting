@@ -57,7 +57,7 @@ func init() {
 
 		wd, err := selenium.NewRemote(caps, "http://127.0.0.1:"+strconv.Itoa(port)+"/wd/hub")
 		if err != nil {
-			panic(err)
+			fmt.Printf("Error: %v", err)
 		}
 
 		d = &driver{
