@@ -4,7 +4,11 @@ go:
   - "1.13.x"
 
 addons:
-  chrome: stable
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
 
 env:
   global:
@@ -14,11 +18,9 @@ branches:
   only:
     - travis
 
-install:
-  - google-chrome
-  - chromedriver
-
 script:
+  - wget http://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_linux64.zip
+  - unzip chromedriver_linux64.zip -d /home/travis/
   - export WEBDRIVER_PATH=/home/travis/chromedriver
   - export PATH=$PATH:/home/travis/
   - sudo apt-get install -y libgconf-2-4
