@@ -8,7 +8,7 @@ addons:
     sources:
       - google-chrome
     packages:
-      - google-chrome-78
+      - google-chrome-stable
 
 env:
   global:
