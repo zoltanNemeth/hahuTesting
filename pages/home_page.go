@@ -1,6 +1,7 @@
 package pages
 
 import (
+	"fmt"
 	"github.com/tebeka/selenium"
 	"github.com/zoltanNemeth/hahuTesting/driver"
 	"strconv"
@@ -17,7 +18,8 @@ var (
 	searchButton              = "//button[@name='submitKereses']"
 	resultsLimitingSelectId   = "hirdetesszemelyautosearch-results"
 	menuToggleXpath           = "//nav[contains(@class, 'navbar')]//button[contains(@class, 'navbar-toggle collapsed')]"
-	loginButtonLinkText       = "Belépés"
+	menuLoginButtonLinkText   = "Belépés"
+	loginFormLoginButtonXpath = "//button[contains(text(), 'Belépés')]"
 	usernameInputFieldId      = "loginform-felhasznalo"
 	passwordInputFieldId      = "loginform-jelszo"
 	errorMessageXpath         = "//p[contains(text(), 'Hibás felhasználónév vagy jelszó')]"
@@ -53,14 +55,24 @@ func (h *homePage) ClickSearchButton() ResultsPage {
 }
 
 func (h *homePage) ClickLoginButton() {
-	h.Page.FindElementByXpath(menuToggleXpath).Click()
-	h.Page.FindElementByLinkText(loginButtonLinkText).Click()
+	condition := selenium.Condition(func(wd selenium.WebDriver) (bool, error) {
+		if h.Page.FindElementByXpath(menuToggleXpath) == nil {
+			return false, nil
+		}
+		return true, nil
+	})
+	driver.Driver().WaitWithTimeout(condition, time.Duration(time.Second*10))
+	err := h.Page.FindElementByXpath(menuToggleXpath).Click()
+	if err != nil {
+		fmt.Errorf("error during clicking on menuToggle")
+	}
+	h.Page.FindElementByLinkText(menuLoginButtonLinkText).Click()
 }
 
 func (h *homePage) LoginWith(username, password string) {
 	h.Page.FindElementById(usernameInputFieldId).SendKeys(username)
 	h.Page.FindElementById(passwordInputFieldId).SendKeys(password)
-	h.Page.FindElementByLinkText(loginButtonLinkText)
+	h.Page.FindElementByXpath(loginFormLoginButtonXpath).Click()
 }
 
 func (h *homePage) IsThereAnErrorMessage() bool {
