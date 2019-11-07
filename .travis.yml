@@ -3,6 +3,9 @@ language: go
 go:
   - "1.13.x"
 
+addons:
+  chrome: stable
+
 env:
   global:
     - GO111MODULE=on
