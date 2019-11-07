@@ -14,9 +14,11 @@ branches:
   only:
     - travis
 
+install:
+  - google-chrome 78.0.3904.70
+  - chromedriver 78.0.3904.70
+
 script:
-  - wget http://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_linux64.zip
-  - unzip chromedriver_linux64.zip -d /home/travis/
   - export WEBDRIVER_PATH=/home/travis/chromedriver
   - export PATH=$PATH:/home/travis/
   - sudo apt-get install -y libgconf-2-4
