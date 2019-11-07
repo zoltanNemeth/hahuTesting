@@ -15,8 +15,8 @@ branches:
     - travis
 
 install:
-  - google-chrome 78.0.3904.70
-  - chromedriver 78.0.3904.70
+  - google-chrome
+  - chromedriver
 
 script:
   - export WEBDRIVER_PATH=/home/travis/chromedriver
