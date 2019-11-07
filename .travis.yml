@@ -14,7 +14,7 @@ branches:
 script:
   - wget http://chromedriver.storage.googleapis.com/2.24/chromedriver_linux64.zip
   - unzip chromedriver_linux64.zip -d /home/travis/
-  - export webdriverPath=/home/travis/chromedriver
+  - export WEBDRIVER_PATH=/home/travis/chromedriver
   - export PATH=$PATH:/home/travis/
   - sudo apt-get install -y libgconf-2-4
   - go test
