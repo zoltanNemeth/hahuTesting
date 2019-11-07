@@ -52,6 +52,7 @@ func init() {
 			"no-first-run",
 			"disable-default-apps",
 			"disable-dev-shm-usage",
+			"headless",
 		}
 
 		caps.AddChrome(chrome.Capabilities{Args: args})
