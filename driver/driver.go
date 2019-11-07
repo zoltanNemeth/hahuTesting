@@ -45,7 +45,13 @@ func init() {
 			"browserName": "chrome",
 		}
 
-		args := []string{"start-maximized", "no-sandbox"}
+		args := []string{
+			"start-maximized",
+			"no-sandbox",
+			"no-default-browser-check",
+			"no-first-run",
+			"disable-default-apps",
+		}
 
 		caps.AddChrome(chrome.Capabilities{Args: args})
 
