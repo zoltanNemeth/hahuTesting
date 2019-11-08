@@ -48,9 +48,6 @@ func init() {
 		args := []string{
 			"start-maximized",
 			"no-sandbox",
-			"no-default-browser-check",
-			"no-first-run",
-			"disable-default-apps",
 			"headless",
 		}
 
