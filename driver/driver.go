@@ -47,7 +47,6 @@ func init() {
 
 		args := []string{
 			"start-maximized",
-			"headless",
 		}
 
 		caps.AddChrome(chrome.Capabilities{Args: args})
