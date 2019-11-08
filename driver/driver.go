@@ -47,7 +47,6 @@ func init() {
 
 		args := []string{
 			"start-maximized",
-			"no-sandbox",
 			"headless",
 		}
 
