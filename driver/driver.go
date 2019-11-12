@@ -31,27 +31,29 @@ func init() {
 
 		err = godotenv.Load()
 		if err != nil {
-			fmt.Printf("Error loading the .env file: %v", err)
+			fmt.Printf("Error loading the .env file: %v\n", err)
 		}
 
 		var opts []selenium.ServiceOption
 		s, err := selenium.NewChromeDriverService(os.Getenv("WEBDRIVER_PATH"), port, opts...)
 
 		if err != nil {
-			fmt.Printf("Error starting the ChromeDriver server: %v", err)
+			fmt.Printf("Error starting the ChromeDriver server: %v\n", err)
 		}
 
 		caps := selenium.Capabilities{
 			"browserName": "chrome",
 		}
 
-		args := []string{"start-maximized", "no-sandbox"}
+		args := []string{
+			"headless",
+		}
 
 		caps.AddChrome(chrome.Capabilities{Args: args})
 
 		wd, err := selenium.NewRemote(caps, "http://127.0.0.1:"+strconv.Itoa(port)+"/wd/hub")
 		if err != nil {
-			panic(err)
+			fmt.Printf("Error: %v\n", err)
 		}
 
 		d = &driver{
