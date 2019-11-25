@@ -7,9 +7,7 @@ import (
 	"strconv"
 )
 
-var (
-	resultsPage pages.ResultsPage
-)
+var resultsPage pages.ResultsPage
 
 func theVisitorLimitsThePotentialResultsTo(limit string) error {
 	limitOfResults, _ := strconv.Atoi(limit)

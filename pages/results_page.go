@@ -10,9 +10,7 @@ type ResultsPage struct {
 	page Page
 }
 
-var (
-	resultsXpath = "//div[contains(@class, 'talalatisor-tartalom')]"
-)
+var resultsXpath = "//div[contains(@class, 'talalatisor-tartalom')]"
 
 func NewResultsPage(URL string) ResultsPage {
 	return ResultsPage{
@@ -30,9 +28,11 @@ func (r *ResultsPage) GetNumOfResults() int {
 		}
 		return true, nil
 	})
+
 	err := driver.Driver().WaitWithTimeoutAndInterval(condition, time.Duration(time.Second*100), time.Duration(time.Second*3))
 	if err != nil {
 		return 0
 	}
+
 	return len(r.page.FindElementsByXpath(resultsXpath))
 }
