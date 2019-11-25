@@ -4,14 +4,12 @@ import (
 	"fmt"
 	"github.com/DATA-DOG/godog"
 	"github.com/zoltanNemeth/hahuTesting/pages"
-	"strconv"
 )
 
 var resultsPage pages.ResultsPage
 
-func theVisitorLimitsThePotentialResultsTo(limit string) error {
-	limitOfResults, _ := strconv.Atoi(limit)
-	pages.HomePage().LimitResultsTo(limitOfResults)
+func theVisitorLimitsThePotentialResultsTo(limit int) error {
+	pages.HomePage().LimitResultsTo(limit)
 	return nil
 }
 
