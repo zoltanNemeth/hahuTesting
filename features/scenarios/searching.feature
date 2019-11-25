@@ -11,4 +11,8 @@ Feature: searching
       |       10        |
       |       20        |
       |       50        |
-      |       100       |
+
+  Scenario: Check sum of results selecting a specific brand
+    Given user is on the site
+    When the user select a specific brand
+    Then the sum of results in the search button should equal to the number after the name of the brand
