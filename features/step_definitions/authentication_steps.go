@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/DATA-DOG/godog"
 	"github.com/zoltanNemeth/hahuTesting/pages"
+	"time"
 )
 
 func theUserAcceptsThePrivacyInformation() error {
@@ -22,6 +23,7 @@ func ensureToProvideALoginFormWithUsernameAndPasswordField() error {
 
 func theUserSubmitsTheFormWithInvalidCredentials(username, password string) error {
 	pages.HomePage().LoginWith(username, password)
+	time.Sleep(time.Duration(time.Second * 2)) // Can be removed, only for demonstrating tests
 	return nil
 }
 

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/tebeka/selenium"
 	"github.com/zoltanNemeth/hahuTesting/driver"
+	"regexp"
 	"strconv"
 	"time"
 )
@@ -13,16 +14,18 @@ type homePage struct {
 }
 
 var (
-	hp                        *homePage
-	privacySettingsOkButtonId = "CybotCookiebotDialogBodyButtonAccept"
-	searchButton              = "//button[@name='submitKereses']"
-	resultsLimitingSelectId   = "hirdetesszemelyautosearch-results"
-	menuToggleXpath           = "//nav[contains(@class, 'navbar')]//button[contains(@class, 'navbar-toggle collapsed')]"
-	menuLoginButtonLinkText   = "Belépés"
-	loginFormLoginButtonXpath = "//button[contains(text(), 'Belépés')]"
-	usernameInputFieldId      = "loginform-felhasznalo"
-	passwordInputFieldId      = "loginform-jelszo"
-	errorMessageXpath         = "//p[contains(text(), 'Hibás felhasználónév vagy jelszó')]"
+	hp                                *homePage
+	brand                             selenium.WebElement
+	privacySettingsOkButtonId         = "CybotCookiebotDialogBodyButtonAccept"
+	searchButton                      = "//button[@name='submitKereses']"
+	resultsLimitingSelectId           = "hirdetesszemelyautosearch-results"
+	brandsWithPotentionalResultsXpath = "//select[@id='hirdetesszemelyautosearch-marka_id']/option"
+	menuToggleXpath                   = "//nav[contains(@class, 'navbar')]//button[contains(@class, 'navbar-toggle collapsed')]"
+	menuLoginButtonLinkText           = "Belépés"
+	loginFormLoginButtonXpath         = "//button[contains(text(), 'Belépés')]"
+	usernameInputFieldId              = "loginform-felhasznalo"
+	passwordInputFieldId              = "loginform-jelszo"
+	errorMessageXpath                 = "//p[contains(text(), 'Hibás felhasználónév vagy jelszó')]"
 )
 
 func HomePage() *homePage {
@@ -90,4 +93,45 @@ func (h *homePage) IsThereAnErrorMessage() bool {
 		return false
 	}
 	return true
+}
+
+func (h *homePage) getBrandWithResults(from, to int) selenium.WebElement {
+	brandsWithPotentionalResults := h.Page.FindElementsByXpath(brandsWithPotentionalResultsXpath)
+	for _, brand := range brandsWithPotentionalResults {
+		SumOfPotentialResults := h.getBrandPotentialResult(brand)
+		if (SumOfPotentialResults > from) && (SumOfPotentialResults < to) {
+			return brand
+		}
+	}
+	return nil
+}
+
+func (h *homePage) getBrandPotentialResult(brand selenium.WebElement) int {
+	b, _ := brand.Text()
+	re := regexp.MustCompile(`[-]?\d[\d,]*[\.]?[\d{2}]*`)
+	matches := re.FindAllString(b, 2)
+	if matches != nil {
+		potentialResult, _ := strconv.Atoi(matches[0])
+		if len(matches) >= 2 {
+			part1 := matches[0]
+			part2 := matches[1]
+			num := part1 + part2
+			potentialResult, _ = strconv.Atoi(num)
+		}
+		return potentialResult
+	}
+	return 0
+}
+
+func (h *homePage) SelectBrandWithResults(from, to int) {
+	brand = h.getBrandWithResults(from, to)
+	brand.Click()
+}
+
+func (h *homePage) GetSumOfResultsBesideBrand() int {
+	return h.getBrandPotentialResult(brand)
+}
+
+func (h *homePage) GetSumOfResultsInSearchButton() int {
+	return h.getBrandPotentialResult(h.Page.FindElementByXpath(searchButton))
 }
