@@ -9,7 +9,7 @@ Feature: searching
   Scenario Outline: Display calculated sum of results selecting a specific brand
     Given user is on the site
     When the user select a specific brand with "<lower_limit>" to "<upper_limit>" potential results
-    Then the sum of results in the search button should equal to the number after the name of the brand
+    Then the sum of results in the search button should equal to the number beside the name of the brand
 
     Examples:
       | lower_limit | upper_limit |
